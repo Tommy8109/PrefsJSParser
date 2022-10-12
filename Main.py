@@ -7,7 +7,6 @@ browser’s GUI.
 
 """
 
-import datetime
 import re
 import linecache
 
@@ -17,7 +16,8 @@ class PrefParse():
         self.path_to_file = ""
         self.pref_data = {}
         self.pref_data_formatted = {}
-        self.pref_lines = {12: "Install date", 41: "Download directory", 77: "Homepage URL", 123: "Device name",
+        self.pref_lines = {12: "Install date", 24: "Update date", 41: "Download directory", 50: "Profile created",
+                           77: "Homepage URL", 83: "Default search engine", 123: "Account & Device name",
                            195: "Desktops synced", 196: "Mobiles synced", 205: "Sync bookmarks?",
                            206: "Sync credit cards?", 207: "Sync history?", 208: "Sync passwords?", 209: "prefs",
                            211: "Sync tabs?", 219: "Last sync", 227: "Username"}
@@ -40,7 +40,7 @@ class PrefParse():
 
         for key, val in self.pref_data.items():
             new_val = str(val).split(",")[1]
-            regex = re.compile("[^a-zA-Z0-9\+:\\ ’\/\.@]")
+            regex = re.compile("[^a-zA-Z0-9\+:\\’\/\.@]")
             m = regex.sub("", new_val)
             self.pref_data_formatted.update({key: m})
 
